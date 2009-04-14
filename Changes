@@ -1,0 +1,5 @@
+Revision history for Perl extension Apache2::Imager::Resize.
+
+0.10  Tue Apr  7 11:49:29 2009
+	- Initial Version working with Apache2.
+

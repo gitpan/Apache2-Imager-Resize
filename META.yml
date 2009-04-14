@@ -1,0 +1,22 @@
+---
+name: Apache2-Imager-Resize
+version: 0.10
+author:
+  - 'Alexander Keusch <akeusch@mms.ag>'
+abstract: "Fixup handler that resizes and crops images on the fly, caching the results, and doesn't require ImageMagick."
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Apache2::Request: 0
+  Apache::Test: 1.12
+  File::Basename: 0
+  Imager: 0
+provides:
+  Apache2::Imager::Resize:
+    file: lib/Apache2/Imager/Resize.pm
+    version: 0.10
+generated_by: Module::Build version 0.3
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
