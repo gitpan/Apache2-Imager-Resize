@@ -12,7 +12,7 @@ use Imager;
 use Data::Dumper;
 
 use vars qw($VERSION);
-$VERSION = '0.11';
+$VERSION = '0.12';
 
 =head1 NAME
 
@@ -288,7 +288,7 @@ sub handler {
     # no cache hit, so we create an Imager object and go through the options
     my $im = Imager->new;
     $im->open( file => $filename ) or return fail("Cannot read $filename: " . $im->errstr);
-    resize($im, \%img_args);
+    $im = resize($im, \%img_args);
 
     # if the cache is disabled, we write the results directly back to the request.
     # You shouldn't do this during fixup - though it works - so if running without a cache we ought to a perlhandler
