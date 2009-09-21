@@ -1,6 +1,6 @@
 ---
 name: Apache2-Imager-Resize
-version: 0.12
+version: 0.13
 author:
   - 'Alexander Keusch <akeusch@mms.ag>'
 abstract: "Fixup handler that resizes and crops images on the fly, caching the results, and doesn't require ImageMagick."
@@ -15,8 +15,8 @@ build_requires:
 provides:
   Apache2::Imager::Resize:
     file: lib/Apache2/Imager/Resize.pm
-    version: 0.12
-generated_by: Module::Build version 0.3
+    version: 0.13
+generated_by: Module::Build version 0.33
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4

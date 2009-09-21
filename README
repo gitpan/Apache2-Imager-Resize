@@ -68,6 +68,10 @@ PARAMETERS
     Overrides the default behaviour of configuration parameter
     "ImgResizeCropToAspectRatio".
 
+  scaletype
+    Scale type 'min', 'max', 'nonprop'. See
+    <http://search.cpan.org/perldoc?Imager::Transformations#scale>.
+
 CONFIGURATION
     In many cases, this will suffice:
 
@@ -187,8 +191,9 @@ BUGS
     No doubt. Reports in rt.cpan.org would be much appreciated.
 
 TODO
-    * Accept more than one cropto parameter, eg top and left.
-    * tests
+    *   Accept more than one cropto parameter, eg top and left.
+
+    *   tests
 
 SEE ALSO
     Imager Apache::ImageMagick Apache::GD::Thumbnail Apache::Imager::Resize

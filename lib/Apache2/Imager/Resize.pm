@@ -12,7 +12,7 @@ use Imager;
 use Data::Dumper;
 
 use vars qw($VERSION);
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 =head1 NAME
 
@@ -87,6 +87,10 @@ By default images won't images get scaled up. If you wan't to do this, set enlar
 =head2 cropAR
 
 Overrides the default behaviour of configuration parameter "ImgResizeCropToAspectRatio".
+
+=head2 scaletype
+
+Scale type 'min', 'max', 'nonprop'. See L<http://search.cpan.org/perldoc?Imager::Transformations#scale>.
 
 =head1 CONFIGURATION
 
@@ -234,6 +238,7 @@ sub handler {
     $img_args{proportional} = $r->param('proportional');
     $img_args{proportional} = 1 if not defined $img_args{proportional} or $img_args{proportional} eq '';
     my $quality = $r->param('quality') || $default_quality;
+    $img_args{scale_type} = $r->param('scaletype');
 
     my $shrunk;
     my ($name, $path, $suffix) = File::Basename::fileparse( $filename, '\.\w{2,5}' );
@@ -265,6 +270,10 @@ sub handler {
 
         if ($img_args{crop_aspect_ratio}) {
             $shrunk .= "_cropAR";
+        }
+
+        if ($img_args{scale_type}) {
+            $shrunk .= "_scaletype".$img_args{scale_type};
         }
 
         $shrunk .= $suffix;
@@ -353,10 +362,25 @@ sub resize {
     }
 
     # enlarge images only if the enlarge argument is set
-    if ( not $args->{enlarge} and
-         ( ( $scale{xpixels} and ($scale{xpixels} > $imgwidth) )
-         or ( $scale{ypixels} and ($scale{ypixels} > $imgheight) ) ) ) {
+    if (
+        not $args->{enlarge}
+        and (
+            ( $scale{xpixels} and ($scale{xpixels} > $imgwidth) )
+            or ( $scale{ypixels} and ($scale{ypixels} > $imgheight) )
+        )
+        and (
+            ($args->{scale_type} ne 'min')
+            or (
+                ( $scale{xpixels} and ($scale{xpixels} > $imgwidth) )
+                and ( $scale{ypixels} and ($scale{ypixels} > $imgheight) )
+            )
+        )
+    ) {
         %scale = ();
+    }
+
+    if ($args->{scale_type}) {
+        $scale{type} = $args->{scale_type};
     }
 
     if ( not $args->{proportional} and $scale{xpixels} and $scale{ypixels} ) {
