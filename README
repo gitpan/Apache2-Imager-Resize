@@ -199,10 +199,10 @@ SEE ALSO
     Imager Apache::ImageMagick Apache::GD::Thumbnail Apache::Imager::Resize
 
 AUTHOR
-    Alexander Keusch, akeusch@mms.ag
+    Alexander Keusch, "<kalex at cpan.org>"
 
 CONTRIBUTORS
-    William Ross, wross@cpan.org
+    William Ross, "<wross at cpan.org>" Jozef Kutej, "<jkutej at cpan.org>"
 
 COPYRIGHT
     This library is free software; you can redistribute it and/or modify it

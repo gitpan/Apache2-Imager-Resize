@@ -12,7 +12,7 @@ use Imager;
 use Data::Dumper;
 
 use vars qw($VERSION);
-$VERSION = '0.13';
+$VERSION = '0.14';
 
 =head1 NAME
 
@@ -503,11 +503,12 @@ L<Imager> L<Apache::ImageMagick> L<Apache::GD::Thumbnail> L<Apache::Imager::Resi
 
 =head1 AUTHOR
 
-Alexander Keusch, akeusch@mms.ag
+Alexander Keusch, C<< <kalex at cpan.org> >>
 
 =head1 CONTRIBUTORS
 
-William Ross, wross@cpan.org
+William Ross, C<< <wross at cpan.org> >>
+Jozef Kutej, C<< <jkutej at cpan.org> >>
 
 =head1 COPYRIGHT
 
