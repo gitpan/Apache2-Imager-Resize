@@ -1,5 +1,8 @@
 Revision history for Perl extension Apache2::Imager::Resize.
 
+0.15  Wed May 26 10:17:04 2010
+    - added qtype parameter
+
 0.14  Mon Sep 21 11:28:15 2009
 	- added scaletype parameter
 

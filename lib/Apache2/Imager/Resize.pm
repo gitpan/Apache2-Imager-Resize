@@ -12,7 +12,7 @@ use Imager;
 use Data::Dumper;
 
 use vars qw($VERSION);
-$VERSION = '0.14';
+$VERSION = '0.15';
 
 =head1 NAME
 
@@ -90,7 +90,11 @@ Overrides the default behaviour of configuration parameter "ImgResizeCropToAspec
 
 =head2 scaletype
 
-Scale type 'min', 'max', 'nonprop'. See L<http://search.cpan.org/perldoc?Imager::Transformations#scale>.
+Scale type 'min', 'max', 'nonprop'. See L<Imager::Transformations/scale>.
+
+=head2 qtype
+
+Quality of scaling 'normal', 'preview', 'mixing'. See L<Imager::Transformations/scale>.
 
 =head1 CONFIGURATION
 
@@ -136,6 +140,10 @@ of the returned image. Default is 'h'.
 If true, the image will be cropped if the specified width and height would lead to
 a new aspect ratio. Default is '1'. The parameter 'cropAR' can be used to override
 this behaviour.
+
+=head2 ImgResizeQtype
+
+Sets the default value for L</qtype>.
 
 =head1 IMAGE FORMATS
 
@@ -222,6 +230,7 @@ sub handler {
     my $widthparm = $r->dir_config('ImgResizeWidthParam') || 'w';
     my $heightparm = $r->dir_config('ImgResizeHeightParam') || 'h';
     my $default_quality = $r->dir_config('ImgResizeDefaultQuality') || '60';
+    my $default_qtype = $r->dir_config('ImgResizeQtype') || 'normal';
     my $crop_aspect_ratio = $r->dir_config('ImgResizeCropToAspectRatio');
     $crop_aspect_ratio = 1 unless defined $crop_aspect_ratio;
 
@@ -239,6 +248,7 @@ sub handler {
     $img_args{proportional} = 1 if not defined $img_args{proportional} or $img_args{proportional} eq '';
     my $quality = $r->param('quality') || $default_quality;
     $img_args{scale_type} = $r->param('scaletype');
+    $img_args{qtype} = $r->param('qtype') || $default_qtype;
 
     my $shrunk;
     my ($name, $path, $suffix) = File::Basename::fileparse( $filename, '\.\w{2,5}' );
@@ -274,6 +284,10 @@ sub handler {
 
         if ($img_args{scale_type}) {
             $shrunk .= "_scaletype".$img_args{scale_type};
+        }
+
+        if ($img_args{qtype}) {
+            $shrunk .= "_qtype".$img_args{qtype};
         }
 
         $shrunk .= $suffix;
@@ -381,6 +395,9 @@ sub resize {
 
     if ($args->{scale_type}) {
         $scale{type} = $args->{scale_type};
+    }
+    if ($args->{qtype}) {
+        $scale{qtype} = $args->{qtype};
     }
 
     if ( not $args->{proportional} and $scale{xpixels} and $scale{ypixels} ) {

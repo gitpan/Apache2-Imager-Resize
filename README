@@ -69,8 +69,12 @@ PARAMETERS
     "ImgResizeCropToAspectRatio".
 
   scaletype
-    Scale type 'min', 'max', 'nonprop'. See
-    <http://search.cpan.org/perldoc?Imager::Transformations#scale>.
+    Scale type 'min', 'max', 'nonprop'. See "scale" in
+    Imager::Transformations.
+
+  qtype
+    Quality of scaling 'normal', 'preview', 'mixing'. See "scale" in
+    Imager::Transformations.
 
 CONFIGURATION
     In many cases, this will suffice:
@@ -113,6 +117,9 @@ CONFIGURATION
     If true, the image will be cropped if the specified width and height
     would lead to a new aspect ratio. Default is '1'. The parameter 'cropAR'
     can be used to override this behaviour.
+
+  ImgResizeQtype
+    Sets the default value for "qtype".
 
 IMAGE FORMATS
     We can work with any image format that Imager can read, which includes
