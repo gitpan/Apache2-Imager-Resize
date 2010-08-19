@@ -12,7 +12,7 @@ use Imager;
 use Data::Dumper;
 
 use vars qw($VERSION);
-$VERSION = '0.15';
+$VERSION = '0.16';
 
 =head1 NAME
 
@@ -375,6 +375,14 @@ sub resize {
         $scale{ypixels} = $args->{h};
     }
 
+    if ($args->{qtype}) {
+        $scale{qtype} = $args->{qtype};
+    }
+
+    if ($args->{scale_type}) {
+        $scale{type} = $args->{scale_type};
+    }
+
     # enlarge images only if the enlarge argument is set
     if (
         not $args->{enlarge}
@@ -391,13 +399,6 @@ sub resize {
         )
     ) {
         %scale = ();
-    }
-
-    if ($args->{scale_type}) {
-        $scale{type} = $args->{scale_type};
-    }
-    if ($args->{qtype}) {
-        $scale{qtype} = $args->{qtype};
     }
 
     if ( not $args->{proportional} and $scale{xpixels} and $scale{ypixels} ) {

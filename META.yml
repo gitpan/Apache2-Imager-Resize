@@ -18,7 +18,7 @@ name: Apache2-Imager-Resize
 provides:
   Apache2::Imager::Resize:
     file: lib/Apache2/Imager/Resize.pm
-    version: 0.15
+    version: 0.16
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.15
+version: 0.16
